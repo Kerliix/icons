@@ -1,0 +1,11 @@
+{
+  "name": "kerliix-icons",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "node packages/icons-react/build.js"
+  }
+}
+
