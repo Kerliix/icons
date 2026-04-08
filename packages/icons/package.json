@@ -1,0 +1,31 @@
+{
+  "name": "@kerliix/icons",
+  "version": "1.0.0",
+  "description": "Official Kerliix icon library (SVGs). MIT licensed icons. Kerliix logos are trademarks.",
+  "keywords": [
+    "kerliix",
+    "icons",
+    "svg",
+    "icon-pack",
+    "design-system"
+  ],
+  "homepage": "https://github.com/Kerliix/icons",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kerliix/icons.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Kerliix/icons/issues"
+  },
+  "author": "Kerliix Corporation Limited",
+  "type": "module",
+  "main": "index.js",
+  "license": "MIT",
+  "files": [
+    "icons",
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
