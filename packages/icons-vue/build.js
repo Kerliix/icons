@@ -1,6 +1,6 @@
 /**
- * @kerliix/icons-react — build script
- * Generates one React component (.js + .d.ts) per SVG, plus a barrel index.
+ * @kerliix/icons-vue — build script
+ * Generates one Vue 3 component (.js + .d.ts) per SVG, plus a barrel index.
  */
 import fs from 'fs';
 import path from 'path';
@@ -19,7 +19,6 @@ for (const file of svgFiles) {
   const raw  = fs.readFileSync(path.join(iconsDir, file), 'utf-8');
   const name = path.basename(file, '.svg');
 
-  // Derive viewBox
   const vbMatch = raw.match(/viewBox="([^"]+)"/);
   const wMatch  = raw.match(/\bwidth="([^"]+)"/);
   const hMatch  = raw.match(/\bheight="([^"]+)"/);
@@ -27,58 +26,52 @@ for (const file of svgFiles) {
     : wMatch && hMatch    ? `0 0 ${wMatch[1]} ${hMatch[1]}`
     : '0 0 24 24';
 
-  // Extract inner SVG markup
   const inner = (raw.match(/<svg[^>]*>([\s\S]*?)<\/svg>\s*$/i) || [])[1]?.trim() ?? '';
+  const esc   = inner.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$\{/g, '\\${');
 
-  // Escape for template literal
-  const esc = inner
-    .replace(/\\/g,    '\\\\')
-    .replace(/`/g,     '\\`')
-    .replace(/\$\{/g,  '\\${');
-
-  // .js
   fs.writeFileSync(path.join(distDir, `${name}.js`), `\
-// @kerliix/icons-react — generated, do not edit
-import React from 'react';
+// @kerliix/icons-vue — generated, do not edit
+import { h, defineComponent } from 'vue';
 
 const _inner = \`${esc}\`;
 
-export function ${name}({ size = 24, color = 'currentColor', className, style, ...props }) {
-  return React.createElement('svg', {
-    xmlns: 'http://www.w3.org/2000/svg',
-    width: size,
-    height: size,
-    viewBox: '${viewBox}',
-    fill: color,
-    className,
-    style,
-    dangerouslySetInnerHTML: { __html: _inner },
-    ...props,
-  });
-}
-${name}.displayName = '${name}';
+export const ${name} = defineComponent({
+  name: '${name}',
+  props: {
+    size:  { type: [Number, String], default: 24 },
+    color: { type: String, default: 'currentColor' },
+  },
+  setup(props, { attrs }) {
+    return () => h('svg', {
+      xmlns: 'http://www.w3.org/2000/svg',
+      width:    props.size,
+      height:   props.size,
+      viewBox:  '${viewBox}',
+      fill:     props.color,
+      innerHTML: _inner,
+      ...attrs,
+    });
+  },
+});
 `);
 
-  // .d.ts
   fs.writeFileSync(path.join(distDir, `${name}.d.ts`), `\
-import { SVGProps } from 'react';
-export interface ${name}Props extends SVGProps<SVGSVGElement> {
-  size?: number | string;
+import { DefineComponent } from 'vue';
+export declare const ${name}: DefineComponent<{
+  size?:  number | string;
   color?: string;
-}
-export declare function ${name}(props: ${name}Props): JSX.Element;
+}>;
 `);
 
   names.push(name);
   console.log(`  ✓ ${name}`);
 }
 
-// Barrel index.js + index.d.ts
 fs.writeFileSync(path.join(distDir, 'index.js'),
   names.map(n => `export { ${n} } from './${n}.js';`).join('\n') + '\n'
 );
 fs.writeFileSync(path.join(distDir, 'index.d.ts'),
-  names.map(n => `export { ${n} } from './${n}.js';\nexport type { ${n}Props } from './${n}.js';`).join('\n') + '\n'
+  names.map(n => `export { ${n} } from './${n}.js';`).join('\n') + '\n'
 );
 
-console.log(`\n@kerliix/icons-react: built ${names.length} components → dist/`);
+console.log(`\n@kerliix/icons-vue: built ${names.length} components → dist/`);

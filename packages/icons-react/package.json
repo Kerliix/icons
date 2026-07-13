@@ -1,36 +1,26 @@
 {
   "name": "@kerliix/icons-react",
   "version": "1.0.0",
-  "description": "React components for Kerliix icons",
-  "keywords": [
-    "kerliix",
-    "icons",
-    "react",
-    "icon-library",
-    "svg"
-  ],
+  "description": "React components for Kerliix icons — size, color, className, and all SVG props supported.",
+  "keywords": ["kerliix", "icons", "react", "svg", "icon-library"],
   "homepage": "https://github.com/Kerliix/icons",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Kerliix/icons.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Kerliix/icons/issues"
-  },
+  "repository": { "type": "git", "url": "https://github.com/Kerliix/icons.git" },
+  "bugs": { "url": "https://github.com/Kerliix/icons/issues" },
+  "author": "mood810 <mahmoodkaliika810@gmail.com>",
   "license": "MIT",
-  "author": "Edgicode Limited",
   "type": "module",
-  "main": "dist/index.js",
+  "main":  "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types":  "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
   "scripts": {
     "build": "node build.js"
   },
-  "peerDependencies": {
-    "react": ">=17"
-  },
-  "files": [
-    "dist"
-  ],
-  "publishConfig": {
-    "access": "public"
-  }
+  "peerDependencies": { "react": ">=17" },
+  "files": ["dist", "build.js"],
+  "publishConfig": { "access": "public" }
 }

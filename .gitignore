@@ -1,0 +1,14 @@
+# Generated build output — rebuilt by CI and release workflow
+packages/*/dist/
+
+# Dependencies
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp

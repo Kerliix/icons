@@ -5,7 +5,6 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "node packages/icons-react/build.js"
+    "build": "node packages/icons/build.js && node packages/icons-react/build.js && node packages/icons-vue/build.js && node packages/icons-svelte/build.js && node packages/icons-webcomponents/build.js"
   }
 }
-

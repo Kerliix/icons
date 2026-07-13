@@ -1,8 +1,8 @@
 {
-  "name": "@kerliix/icons",
+  "name": "@kerliix/icons-webcomponents",
   "version": "1.0.0",
-  "description": "Official Kerliix icon library — browser-safe SVG strings. MIT licensed icons; Kerliix logos are trademarks.",
-  "keywords": ["kerliix", "icons", "svg", "icon-pack", "design-system"],
+  "description": "Framework-agnostic Web Components for Kerliix icons. Works in any HTML, React, Vue, Angular, or plain JS project.",
+  "keywords": ["kerliix", "icons", "web-components", "custom-elements", "svg", "icon-library"],
   "homepage": "https://github.com/Kerliix/icons",
   "repository": { "type": "git", "url": "https://github.com/Kerliix/icons.git" },
   "bugs": { "url": "https://github.com/Kerliix/icons/issues" },
@@ -20,6 +20,6 @@
   "scripts": {
     "build": "node build.js"
   },
-  "files": ["dist", "icons", "build.js"],
+  "files": ["dist", "build.js"],
   "publishConfig": { "access": "public" }
 }
