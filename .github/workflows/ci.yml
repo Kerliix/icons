@@ -15,26 +15,66 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # ── Node / JS packages ───────────────────────────────────────────────
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
 
-      - name: Install dependencies
+      - name: Install Node dependencies
         run: npm install
 
-      - name: Build all packages
+      - name: Build JS packages
         run: npm run build
 
-      - name: Verify build outputs
+      - name: Verify JS build outputs
         run: |
-          echo "Checking build outputs..."
-          test -f packages/icons/dist/index.js           || (echo "❌ @kerliix/icons build missing" && exit 1)
-          test -f packages/icons/dist/index.d.ts         || (echo "❌ @kerliix/icons types missing" && exit 1)
-          test -f packages/icons-react/dist/index.js     || (echo "❌ @kerliix/icons-react build missing" && exit 1)
-          test -f packages/icons-react/dist/index.d.ts   || (echo "❌ @kerliix/icons-react types missing" && exit 1)
-          test -f packages/icons-vue/dist/index.js       || (echo "❌ @kerliix/icons-vue build missing" && exit 1)
-          test -f packages/icons-svelte/dist/index.js    || (echo "❌ @kerliix/icons-svelte build missing" && exit 1)
-          test -f packages/icons-webcomponents/dist/index.js || (echo "❌ @kerliix/icons-webcomponents build missing" && exit 1)
-          echo "✅ All packages built successfully"
+          echo "Checking JS build outputs..."
+          test -f packages/icons/dist/index.js                || (echo "❌ @kerliix/icons build missing"             && exit 1)
+          test -f packages/icons/dist/index.d.ts              || (echo "❌ @kerliix/icons types missing"             && exit 1)
+          test -f packages/icons-react/dist/index.js          || (echo "❌ @kerliix/icons-react build missing"       && exit 1)
+          test -f packages/icons-react/dist/index.d.ts        || (echo "❌ @kerliix/icons-react types missing"       && exit 1)
+          test -f packages/icons-vue/dist/index.js            || (echo "❌ @kerliix/icons-vue build missing"         && exit 1)
+          test -f packages/icons-vue/dist/index.d.ts          || (echo "❌ @kerliix/icons-vue types missing"         && exit 1)
+          test -f packages/icons-svelte/dist/index.js         || (echo "❌ @kerliix/icons-svelte build missing"      && exit 1)
+          test -f packages/icons-svelte/dist/index.d.ts       || (echo "❌ @kerliix/icons-svelte types missing"      && exit 1)
+          test -f packages/icons-webcomponents/dist/index.js  || (echo "❌ @kerliix/icons-webcomponents build missing" && exit 1)
+          echo "✅ All JS packages built successfully"
+
+      # ── Python package ───────────────────────────────────────────────────
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python build tools
+        run: pip install build
+
+      - name: Generate Python package source
+        run: python build.py
+        working-directory: packages/icons-python
+
+      - name: Build Python wheel + sdist
+        run: python -m build
+        working-directory: packages/icons-python
+
+      - name: Verify Python build outputs
+        run: |
+          echo "Checking Python build outputs..."
+          test -f packages/icons-python/kerliix_icons/__init__.py || (echo "❌ kerliix_icons/__init__.py missing" && exit 1)
+          test -f packages/icons-python/kerliix_icons/py.typed    || (echo "❌ kerliix_icons/py.typed missing"   && exit 1)
+          ls packages/icons-python/dist/*.whl  >/dev/null 2>&1    || (echo "❌ Python wheel missing"             && exit 1)
+          ls packages/icons-python/dist/*.tar.gz >/dev/null 2>&1  || (echo "❌ Python sdist missing"             && exit 1)
+          echo "✅ Python package built successfully"
+
+      - name: Smoke-test the installed package
+        run: |
+          pip install packages/icons-python/dist/*.whl
+          python - <<'EOF'
+          from kerliix_icons import KerliixIcon, KerliixPayIcon, get_icon, list_icons
+          assert KerliixIcon.startswith('<svg'), "KerliixIcon is not an SVG string"
+          assert get_icon("KerliixPayIcon") is not None, "get_icon lookup failed"
+          assert "KerliixIcons" in list_icons(), "list_icons missing KerliixIcons"
+          print("✅ kerliix-icons smoke test passed:", list_icons())
+          EOF

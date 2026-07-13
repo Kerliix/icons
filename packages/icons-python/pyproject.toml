@@ -1,0 +1,35 @@
+[build-system]
+requires      = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name            = "kerliix-icons"
+version         = "1.0.0"
+description     = "Official Kerliix icon library — typed SVG strings for every icon."
+readme          = "README.md"
+license         = { text = "MIT" }
+authors         = [{ name = "mood810", email = "mahmoodkaliika810@gmail.com" }]
+keywords        = ["kerliix", "icons", "svg", "icon-pack", "design-system"]
+requires-python = ">=3.8"
+classifiers     = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Multimedia :: Graphics",
+    "Typing :: Typed",
+]
+
+[project.urls]
+Homepage   = "https://github.com/Kerliix/icons"
+Repository = "https://github.com/Kerliix/icons.git"
+Changelog  = "https://github.com/Kerliix/icons/blob/main/CHANGELOG.md"
+Issues     = "https://github.com/Kerliix/icons/issues"
+
+[tool.setuptools.packages.find]
+where   = ["."]
+include = ["kerliix_icons*"]
+
+[tool.setuptools.package-data]
+kerliix_icons = ["py.typed"]

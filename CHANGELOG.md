@@ -17,8 +17,9 @@ First public release of the Kerliix Icons library.
 | `@kerliix/icons` | Browser-safe SVG string exports (no Node.js `fs` dependency) |
 | `@kerliix/icons-react` | React components with `size`, `color`, `className`, `style`, and all SVG props |
 | `@kerliix/icons-vue` | Vue 3 components with `size`, `color`, and attribute pass-through |
-| `@kerliix/icons-svelte` | Svelte components with `size`, `color`, `class`, and `$$restProps` |
+| `@kerliix/icons-svelte` | Svelte components with `size`, `color`, `class`, and `$restProps` |
 | `@kerliix/icons-webcomponents` | Framework-agnostic Custom Elements, works in any HTML or JS project |
+| `kerliix-icons` (PyPI) | Python — typed SVG strings, `get_icon()`, `list_icons()`; works in Django, FastAPI, Jinja2, and any template engine |
 
 ### Icons
 

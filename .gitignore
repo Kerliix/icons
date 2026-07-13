@@ -8,6 +8,14 @@ node_modules/
 .DS_Store
 Thumbs.db
 
+# Python build artifacts
+packages/icons-python/dist/
+packages/icons-python/*.egg-info/
+packages/icons-python/kerliix_icons/
+__pycache__/
+*.pyc
+*.pyo
+
 # Editor
 .vscode/
 .idea/

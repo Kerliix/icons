@@ -7,7 +7,7 @@ on:
 
 jobs:
   publish:
-    name: Publish to npm & Create GitHub Release
+    name: Publish to npm, PyPI & Create GitHub Release
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -16,6 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # ── Node / npm ───────────────────────────────────────────────────────
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -23,10 +24,10 @@ jobs:
           registry-url: https://registry.npmjs.org
           cache: npm
 
-      - name: Install dependencies
+      - name: Install Node dependencies
         run: npm install
 
-      - name: Build all packages
+      - name: Build JS packages
         run: npm run build
 
       - name: Publish @kerliix/icons
@@ -54,6 +55,31 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      # ── Python / PyPI ────────────────────────────────────────────────────
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python build tools
+        run: pip install build twine
+
+      - name: Generate Python package source
+        run: python build.py
+        working-directory: packages/icons-python
+
+      - name: Build Python wheel + sdist
+        run: python -m build
+        working-directory: packages/icons-python
+
+      - name: Publish to PyPI
+        run: twine upload dist/*
+        working-directory: packages/icons-python
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+
+      # ── GitHub Release ───────────────────────────────────────────────────
       - name: Extract version from tag
         id: version
         run: echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
@@ -65,9 +91,9 @@ jobs:
             const tag = '${{ steps.version.outputs.tag }}';
             const { data } = await github.rest.repos.createRelease({
               owner: context.repo.owner,
-              repo: context.repo.repo,
-              tag_name: tag,
-              name: `Kerliix Icons ${tag}`,
+              repo:  context.repo.repo,
+              tag_name:   tag,
+              name:       `Kerliix Icons ${tag}`,
               body: [
                 `## Kerliix Icons ${tag}`,
                 '',
@@ -75,14 +101,18 @@ jobs:
                 '',
                 '### Install',
                 '```bash',
+                '# JavaScript / Node',
                 'npm install @kerliix/icons',
                 'npm install @kerliix/icons-react',
                 'npm install @kerliix/icons-vue',
                 'npm install @kerliix/icons-svelte',
                 'npm install @kerliix/icons-webcomponents',
+                '',
+                '# Python',
+                'pip install kerliix-icons',
                 '```',
               ].join('\n'),
-              draft: false,
+              draft:      false,
               prerelease: false,
             });
             console.log(`Release created: ${data.html_url}`);
