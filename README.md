@@ -1,95 +1,277 @@
-# Kerliix Icons
+Kerliix Icons
 
 Official icon library for the Kerliix ecosystem.
 
-## Packages
+Kerliix Icons provides a unified collection of clean, scalable icons designed for Kerliix products, applications, developer tools, and user interfaces.
 
-- `@kerliix/icons` → Raw SVG icons
-- `@kerliix/icons-react` → React components
+---
 
-## Installation
+Packages
 
-### SVG icons
-```bash
+Kerliix Icons is distributed as separate packages:
+
+"@kerliix/icons"
+
+Core SVG icon assets.
+
+Use this package when you need raw SVG files, custom rendering, or integration with non-React applications.
+
 npm install @kerliix/icons
-```
 
-### React (if using React)
-```bash
+---
+
+"@kerliix/icons-react"
+
+Official React component library built on top of Kerliix SVG icons.
+
+Provides React-friendly components with support for:
+
+- "size"
+- "color"
+- "className"
+- SVG properties
+- Custom styling
+
 npm install @kerliix/icons-react
-```
 
-## Usage
+---
 
-### Using SVGs directly
-```js
-import { Kerliix, KerliixPay, KerliixIcons } from "@kerliix/icons";
+Usage
 
-<Kerliix />
-<KerliixPay />
-<KerliixIcons />
-```
+SVG Icons
 
-Or use the files directly:
+Import SVG assets directly:
 
-```
-node_modules/@kerliix/icons/icons/k.svg
-```
+import { KerliixIcon, KerliixPayIcon } from "@kerliix/icons";
 
-### React usage (example)
-```jsx
-import { KIcon } from "@kerliix/icons-react";
+console.log(KerliixIcon);
+
+Or access the raw files:
+
+node_modules/@kerliix/icons/icons/kerliix.svg
+
+You can also use them directly in HTML:
+
+<img src="/icons/kerliix.svg" alt="Kerliix">
+
+---
+
+React Usage
+
+Import icons from:
+
+@kerliix/icons-react
+
+Example:
+
+import { KerliixIcon } from "@kerliix/icons-react";
 
 export default function App() {
-  return <KIcon size={24} />;
+  return (
+    <KerliixIcon
+      size={24}
+      color="currentColor"
+    />
+  );
 }
-```
 
-## Design Principles
+All icons support standard SVG properties:
 
-- 24x24 grid
-- Consistent stroke width
-- Clean, minimal, scalable SVGs
-- Designed for UI, apps, and developer tools
+<KerliixIcon
+  size={32}
+  className="my-icon"
+  strokeWidth={1.5}
+/>
 
-## License
+---
 
-Kerliix icons are licensed under the MIT License.
+Available Icons
 
-## Trademark Notice
+Kerliix Icons includes:
 
-Kerliix icons are MIT licensed. Kerliix logos are trademarks and cannot be modified or misused.
+Brand
 
-This includes (but is not limited to):
+- Kerliix
+- Kerliix Pay
+- Kerliix OAuth
+- Kerliix UAPI
+
+Products
+
+- Accounts
+- Payments
+- Developer Tools
+- Cloud Services
+
+UI
+
+- Search
+- Settings
+- User
+- Notifications
+- Navigation
+
+Security
+
+- Shield
+- Lock
+- Key
+- Verification
+
+More icons are added continuously.
+
+---
+
+Design Principles
+
+All Kerliix icons follow a consistent design system:
+
+- 24×24 pixel grid
+- Clean and minimal geometry
+- Consistent stroke weight
+- Scalable SVG format
+- Optimized for digital interfaces
+- Designed for accessibility and clarity
+
+Kerliix Icons are built for:
+
+- Web applications
+- Mobile applications
+- Developer platforms
+- Dashboards
+- Design systems
+
+---
+
+Icon Naming Convention
+
+Icons follow a predictable naming structure.
+
+Examples:
+
+KerliixIcon
+KerliixPayIcon
+KerliixOAuthIcon
+UserIcon
+SearchIcon
+SettingsIcon
+
+Brand assets use the Kerliix prefix to avoid naming conflicts.
+
+---
+
+License
+
+Kerliix Icons are licensed under the:
+
+MIT License
+
+You are free to:
+
+- Use icons in personal projects
+- Use icons in commercial projects
+- Modify UI icons
+- Redistribute the library
+
+---
+
+Trademark Notice
+
+The MIT license applies to the icon library and SVG assets.
+
+However, Kerliix brand assets remain protected trademarks.
+
+Restricted assets include:
+
 - Kerliix logo
+- Kerliix wordmark
 - Kerliix Pay logo
-- Brand-specific assets
+- Product-specific logos
+- Official brand marks
 
-For brand usage, please follow official guidelines (coming soon).
+These assets may not be:
 
-## Contributing
+- Modified
+- Rebranded
+- Used to imply official partnership or endorsement
+- Used as part of another brand identity
 
-We welcome contributions!
+Official brand usage guidelines will be provided separately.
 
-### Steps:
-1. Fork the repo
-2. Add your icon (SVG format, 24x24 grid)
-3. Ensure consistency with existing icons
-4. Open a Pull Request
+---
 
-> Kerliix icons are part of a broader kerliix ecosystem.
+Contributing
 
-## Links
+Contributions are welcome.
 
-- GitHub: https://github.com/Kerliix/icons
-- Website: https://icons.kerliix.com
+Before submitting an icon:
 
-## Future Plans
+1. Fork the repository
+2. Create your icon in SVG format
+3. Follow the 24×24 grid system
+4. Maintain existing design consistency
+5. Submit a Pull Request
 
-- Full React library
+Example:
+
+icons/
+ └── security/
+      └── shield.svg
+
+All contributions are reviewed before being included.
+
+---
+
+Repository
+
+GitHub:
+
+https://github.com/Kerliix/icons
+
+Website:
+
+https://icons.kerliix.com
+
+---
+
+Roadmap
+
+Future improvements include:
+
+React Ecosystem
+
+- Complete React component library
+- TypeScript support
+- Component documentation
+- Playground
+
+Developer Tools
+
 - CDN delivery
-- Figma kit
 - Icon search platform
-- Integration with design tools
+- API access
+- Package integrations
 
-> Kerliix 2026.
+Design Tools
+
+- Figma component library
+- Design tokens
+- Plugin integrations
+
+Ecosystem Integration
+
+Native integration across:
+
+- Kerliix Accounts
+- Kerliix Pay
+- Kerliix OAuth
+- Kerliix Developer Platform
+- Future Kerliix products
+
+---
+
+About Kerliix
+
+Kerliix Icons are part of the broader Kerliix ecosystem, providing a unified visual language across Kerliix products and services.
+
+© Kerliix 2026
