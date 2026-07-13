@@ -1,0 +1,88 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    name: Publish to npm & Create GitHub Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build all packages
+        run: npm run build
+
+      - name: Publish @kerliix/icons
+        run: npm publish --workspace packages/icons
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish @kerliix/icons-react
+        run: npm publish --workspace packages/icons-react
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish @kerliix/icons-vue
+        run: npm publish --workspace packages/icons-vue
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish @kerliix/icons-svelte
+        run: npm publish --workspace packages/icons-svelte
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish @kerliix/icons-webcomponents
+        run: npm publish --workspace packages/icons-webcomponents
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Extract version from tag
+        id: version
+        run: echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const tag = '${{ steps.version.outputs.tag }}';
+            const { data } = await github.rest.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: tag,
+              name: `Kerliix Icons ${tag}`,
+              body: [
+                `## Kerliix Icons ${tag}`,
+                '',
+                'See [CHANGELOG.md](https://github.com/Kerliix/icons/blob/main/CHANGELOG.md) for the full list of changes.',
+                '',
+                '### Install',
+                '```bash',
+                'npm install @kerliix/icons',
+                'npm install @kerliix/icons-react',
+                'npm install @kerliix/icons-vue',
+                'npm install @kerliix/icons-svelte',
+                'npm install @kerliix/icons-webcomponents',
+                '```',
+              ].join('\n'),
+              draft: false,
+              prerelease: false,
+            });
+            console.log(`Release created: ${data.html_url}`);
