@@ -18,7 +18,7 @@
     "url": "https://github.com/Kerliix/icons/issues"
   },
   "license": "MIT",
-  "author": "Kerliix Technologies Limited",
+  "author": "Edgicode Limited",
   "type": "module",
   "main": "dist/index.js",
   "peerDependencies": {
