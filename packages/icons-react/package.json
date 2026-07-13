@@ -2,7 +2,7 @@
   "name": "@kerliix/icons-react",
   "version": "1.0.0",
   "description": "React components for Kerliix icons",
-    "keywords": [
+  "keywords": [
     "kerliix",
     "icons",
     "react",
@@ -21,6 +21,9 @@
   "author": "Edgicode Limited",
   "type": "module",
   "main": "dist/index.js",
+  "scripts": {
+    "build": "node build.js"
+  },
   "peerDependencies": {
     "react": ">=17"
   },
