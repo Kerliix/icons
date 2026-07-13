@@ -23,9 +23,11 @@ npm install @kerliix/icons-react
 
 ### Using SVGs directly
 ```js
-import { icons } from "@kerliix/icons";
+import { Kerliix, KerliixPay, KerliixIcons } from "@kerliix/icons";
 
-console.log(icons.k);
+<Kerliix />
+<KerliixPay />
+<KerliixIcons />
 ```
 
 Or use the files directly:
