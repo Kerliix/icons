@@ -1,4 +1,4 @@
-Kerliix Icons
+# Kerliix Icons
 
 Official icon library for the Kerliix ecosystem.
 
@@ -6,64 +6,71 @@ Kerliix Icons provides a unified collection of clean, scalable icons designed fo
 
 ---
 
-Packages
+## Packages
 
 Kerliix Icons is distributed as separate packages:
 
-"@kerliix/icons"
+### `@kerliix/icons`
 
 Core SVG icon assets.
 
 Use this package when you need raw SVG files, custom rendering, or integration with non-React applications.
 
+```bash
 npm install @kerliix/icons
+```
 
 ---
 
-"@kerliix/icons-react"
+### `@kerliix/icons-react`
 
 Official React component library built on top of Kerliix SVG icons.
 
 Provides React-friendly components with support for:
 
-- "size"
-- "color"
-- "className"
+- `size`
+- `color`
+- `className`
 - SVG properties
 - Custom styling
 
+```bash
 npm install @kerliix/icons-react
+```
 
 ---
 
-Usage
+## Usage
 
-SVG Icons
+### SVG Icons
 
 Import SVG assets directly:
 
+```js
 import { KerliixIcon, KerliixPayIcon } from "@kerliix/icons";
 
 console.log(KerliixIcon);
+```
 
 Or access the raw files:
 
+```
 node_modules/@kerliix/icons/icons/kerliix.svg
+```
 
 You can also use them directly in HTML:
 
+```html
 <img src="/icons/kerliix.svg" alt="Kerliix">
+```
 
 ---
 
-React Usage
+### React Usage
 
-Import icons from:
+Import icons from `@kerliix/icons-react`:
 
-@kerliix/icons-react
-
-Example:
-
+```jsx
 import { KerliixIcon } from "@kerliix/icons-react";
 
 export default function App() {
@@ -74,36 +81,39 @@ export default function App() {
     />
   );
 }
+```
 
 All icons support standard SVG properties:
 
+```jsx
 <KerliixIcon
   size={32}
   className="my-icon"
   strokeWidth={1.5}
 />
+```
 
 ---
 
-Available Icons
+## Available Icons
 
 Kerliix Icons includes:
 
-Brand
+### Brand
 
 - Kerliix
 - Kerliix Pay
 - Kerliix OAuth
 - Kerliix UAPI
 
-Products
+### Products
 
 - Accounts
 - Payments
 - Developer Tools
 - Cloud Services
 
-UI
+### UI
 
 - Search
 - Settings
@@ -111,7 +121,7 @@ UI
 - Notifications
 - Navigation
 
-Security
+### Security
 
 - Shield
 - Lock
@@ -122,7 +132,7 @@ More icons are added continuously.
 
 ---
 
-Design Principles
+## Design Principles
 
 All Kerliix icons follow a consistent design system:
 
@@ -143,28 +153,28 @@ Kerliix Icons are built for:
 
 ---
 
-Icon Naming Convention
+## Icon Naming Convention
 
-Icons follow a predictable naming structure.
+Icons follow a predictable `PascalCase` naming structure ending with `Icon`.
 
-Examples:
+**Examples:**
 
+```
 KerliixIcon
 KerliixPayIcon
 KerliixOAuthIcon
 UserIcon
 SearchIcon
 SettingsIcon
+```
 
-Brand assets use the Kerliix prefix to avoid naming conflicts.
+Brand assets use the `Kerliix` prefix to avoid naming conflicts.
 
 ---
 
-License
+## License
 
-Kerliix Icons are licensed under the:
-
-MIT License
+Kerliix Icons are licensed under the **MIT License**.
 
 You are free to:
 
@@ -175,7 +185,7 @@ You are free to:
 
 ---
 
-Trademark Notice
+## Trademark Notice
 
 The MIT license applies to the icon library and SVG assets.
 
@@ -200,9 +210,9 @@ Official brand usage guidelines will be provided separately.
 
 ---
 
-Contributing
+## Contributing
 
-Contributions are welcome.
+Contributions are welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md) for full guidelines.
 
 Before submitting an icon:
 
@@ -212,53 +222,50 @@ Before submitting an icon:
 4. Maintain existing design consistency
 5. Submit a Pull Request
 
-Example:
+**Example structure:**
 
+```
 icons/
  └── security/
       └── shield.svg
+```
 
 All contributions are reviewed before being included.
 
 ---
 
-Repository
+## Repository
 
-GitHub:
-
-https://github.com/Kerliix/icons
-
-Website:
-
-https://icons.kerliix.com
+- **GitHub:** [https://github.com/Kerliix/icons](https://github.com/Kerliix/icons)
+- **Website:** [https://icons.kerliix.com](https://icons.kerliix.com)
 
 ---
 
-Roadmap
+## Roadmap
 
 Future improvements include:
 
-React Ecosystem
+### React Ecosystem
 
 - Complete React component library
 - TypeScript support
 - Component documentation
 - Playground
 
-Developer Tools
+### Developer Tools
 
 - CDN delivery
 - Icon search platform
 - API access
 - Package integrations
 
-Design Tools
+### Design Tools
 
 - Figma component library
 - Design tokens
 - Plugin integrations
 
-Ecosystem Integration
+### Ecosystem Integration
 
 Native integration across:
 
@@ -270,7 +277,7 @@ Native integration across:
 
 ---
 
-About Kerliix
+## About Kerliix
 
 Kerliix Icons are part of the broader Kerliix ecosystem, providing a unified visual language across Kerliix products and services.
 
