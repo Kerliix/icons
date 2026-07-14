@@ -1,6 +1,6 @@
 {
   "name": "@kerliix/icons-react",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "React components for Kerliix icons — size, color, className, and all SVG props supported.",
   "keywords": ["kerliix", "icons", "react", "svg", "icon-library"],
   "homepage": "https://github.com/Kerliix/icons",

@@ -1,6 +1,6 @@
 {
   "name": "@kerliix/icons-webcomponents",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Framework-agnostic Web Components for Kerliix icons. Works in any HTML, React, Vue, Angular, or plain JS project.",
   "keywords": ["kerliix", "icons", "web-components", "custom-elements", "svg", "icon-library"],
   "homepage": "https://github.com/Kerliix/icons",

@@ -1,6 +1,6 @@
 {
   "name": "@kerliix/icons-svelte",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Svelte components for Kerliix icons — size, color, class, and $$restProps supported.",
   "keywords": ["kerliix", "icons", "svelte", "svelte5", "svg", "icon-library"],
   "homepage": "https://github.com/Kerliix/icons",

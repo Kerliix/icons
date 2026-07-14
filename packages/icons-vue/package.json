@@ -1,6 +1,6 @@
 {
   "name": "@kerliix/icons-vue",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Vue 3 components for Kerliix icons — size, color, and all HTML attrs supported.",
   "keywords": ["kerliix", "icons", "vue", "vue3", "svg", "icon-library"],
   "homepage": "https://github.com/Kerliix/icons",
