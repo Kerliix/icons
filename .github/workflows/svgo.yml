@@ -12,12 +12,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Install SVGO
         run: npm install -g svgo
@@ -25,14 +25,21 @@ jobs:
       - name: Run SVGO (dry-run, check only)
         run: |
           echo "Checking SVG files for optimization..."
-          svgo --multipass -f packages/icons/icons/ -o /tmp/svgo-output/
+
+          svgo --multipass \
+            -f packages/icons/icons/ \
+            -o /tmp/svgo-output/
+
           echo "Comparing originals vs optimized..."
+
           for file in packages/icons/icons/*.svg; do
             name=$(basename "$file")
             orig=$(wc -c < "$file")
             optim=$(wc -c < "/tmp/svgo-output/$name" 2>/dev/null || echo "$orig")
-            savings=$(( orig - optim ))
-            echo "  $name: ${orig} → ${optim} bytes (savings: ${savings})"
+            savings=$((orig - optim))
+
+            echo "$name: ${orig} → ${optim} bytes (savings: ${savings})"
           done
-          echo ""
-          echo "ℹ️  SVGs can be further optimized. Run 'svgo --multipass -f packages/icons/icons/' locally to apply."
+
+          echo "✅ SVG optimization check completed"
+          
